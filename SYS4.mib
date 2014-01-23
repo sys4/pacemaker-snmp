@@ -33,7 +33,7 @@ sys4 MODULE-IDENTITY
 	REVISION "201211080814Z"
 	DESCRIPTION "First draft."
 
-	::= { enterprises 39997 }
+	::= { enterprises 39996 }
 
 
 -- SYS4 global registrations
