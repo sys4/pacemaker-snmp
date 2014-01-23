@@ -32,7 +32,7 @@ sys4Pacemaker MODULE-IDENTITY
 	REVISION "201312271000Z"
 	DESCRIPTION "First draft."
 
-	::= { sys4Experimental 4 }
+	::= { sys4SNMPExperimental 4 }
 
 --
 
