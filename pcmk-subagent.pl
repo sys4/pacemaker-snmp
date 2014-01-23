@@ -616,22 +616,22 @@ sub get_sys4PcmkResourceFailure {
 # Hash for all OIDs
 my  $oidtable={
 # Table objects
-    ".1.3.6.1.4.1.39997.99.4.2.3.1.1.0"=>{func=>\&get_sys4PcmkNodeIndex,type=>ASN_INTEGER, check=>\&check_sys4PcmkNodeTable, nextoid=>\&next_sys4PcmkNodeTable, istable=>'1', next=>"", numindex=>1},
-    ".1.3.6.1.4.1.39997.99.4.2.3.1.2.0"=>{func=>\&get_sys4PcmkNodeName,type=>ASN_OCTET_STR, check=>\&check_sys4PcmkNodeTable, nextoid=>\&next_sys4PcmkNodeTable, istable=>'1', next=>"", numindex=>1},
-    ".1.3.6.1.4.1.39997.99.4.2.3.1.3.0"=>{func=>\&get_sys4PcmkNodeId,type=>ASN_INTEGER, check=>\&check_sys4PcmkNodeTable, nextoid=>\&next_sys4PcmkNodeTable, istable=>'1', next=>"", numindex=>1},
-    ".1.3.6.1.4.1.39997.99.4.2.3.1.4.0"=>{func=>\&get_sys4PcmkNodeStatus,type=>ASN_INTEGER, check=>\&check_sys4PcmkNodeTable, nextoid=>\&next_sys4PcmkNodeTable, istable=>'1', next=>"", numindex=>1},
-    ".1.3.6.1.4.1.39997.99.4.3.6.1.1.0"=>{func=>\&get_sys4PcmkResourceIndex,type=>ASN_INTEGER, check=>\&check_sys4PcmkResourceTable, nextoid=>\&next_sys4PcmkResourceTable, istable=>'1', next=>"", numindex=>1},
-    ".1.3.6.1.4.1.39997.99.4.3.6.1.2.0"=>{func=>\&get_sys4PcmkResourceName,type=>ASN_OCTET_STR, check=>\&check_sys4PcmkResourceTable, nextoid=>\&next_sys4PcmkResourceTable, istable=>'1', next=>"", numindex=>1},
-    ".1.3.6.1.4.1.39997.99.4.3.6.1.3.0"=>{func=>\&get_sys4PcmkResourceStatus,type=>ASN_INTEGER, check=>\&check_sys4PcmkResourceTable, nextoid=>\&next_sys4PcmkResourceTable, istable=>'1', next=>"", numindex=>1},
-    ".1.3.6.1.4.1.39997.99.4.3.6.1.4.0"=>{func=>\&get_sys4PcmkResourceFailure,type=>ASN_INTEGER, check=>\&check_sys4PcmkResourceTable, nextoid=>\&next_sys4PcmkResourceTable, istable=>'1', next=>"", numindex=>1},
+    ".1.3.6.1.4.1.39996.99.4.2.3.1.1.0"=>{func=>\&get_sys4PcmkNodeIndex,type=>ASN_INTEGER, check=>\&check_sys4PcmkNodeTable, nextoid=>\&next_sys4PcmkNodeTable, istable=>'1', next=>"", numindex=>1},
+    ".1.3.6.1.4.1.39996.99.4.2.3.1.2.0"=>{func=>\&get_sys4PcmkNodeName,type=>ASN_OCTET_STR, check=>\&check_sys4PcmkNodeTable, nextoid=>\&next_sys4PcmkNodeTable, istable=>'1', next=>"", numindex=>1},
+    ".1.3.6.1.4.1.39996.99.4.2.3.1.3.0"=>{func=>\&get_sys4PcmkNodeId,type=>ASN_INTEGER, check=>\&check_sys4PcmkNodeTable, nextoid=>\&next_sys4PcmkNodeTable, istable=>'1', next=>"", numindex=>1},
+    ".1.3.6.1.4.1.39996.99.4.2.3.1.4.0"=>{func=>\&get_sys4PcmkNodeStatus,type=>ASN_INTEGER, check=>\&check_sys4PcmkNodeTable, nextoid=>\&next_sys4PcmkNodeTable, istable=>'1', next=>"", numindex=>1},
+    ".1.3.6.1.4.1.39996.99.4.3.6.1.1.0"=>{func=>\&get_sys4PcmkResourceIndex,type=>ASN_INTEGER, check=>\&check_sys4PcmkResourceTable, nextoid=>\&next_sys4PcmkResourceTable, istable=>'1', next=>"", numindex=>1},
+    ".1.3.6.1.4.1.39996.99.4.3.6.1.2.0"=>{func=>\&get_sys4PcmkResourceName,type=>ASN_OCTET_STR, check=>\&check_sys4PcmkResourceTable, nextoid=>\&next_sys4PcmkResourceTable, istable=>'1', next=>"", numindex=>1},
+    ".1.3.6.1.4.1.39996.99.4.3.6.1.3.0"=>{func=>\&get_sys4PcmkResourceStatus,type=>ASN_INTEGER, check=>\&check_sys4PcmkResourceTable, nextoid=>\&next_sys4PcmkResourceTable, istable=>'1', next=>"", numindex=>1},
+    ".1.3.6.1.4.1.39996.99.4.3.6.1.4.0"=>{func=>\&get_sys4PcmkResourceFailure,type=>ASN_INTEGER, check=>\&check_sys4PcmkResourceTable, nextoid=>\&next_sys4PcmkResourceTable, istable=>'1', next=>"", numindex=>1},
 # Scalars
-	'.1.3.6.1.4.1.39997.99.4.2.1.0'=>{func=>\&get_sys4PcmkTotalNodes,type=>ASN_INTEGER,next=>"", numindex=>1},	
-	'.1.3.6.1.4.1.39997.99.4.2.2.0'=>{func=>\&get_sys4PcmkOnlineNodes,type=>ASN_INTEGER,next=>"", numindex=>1},	
-	'.1.3.6.1.4.1.39997.99.4.3.1.0'=>{func=>\&get_sys4PcmkResourcePrimitiveNumber,type=>ASN_INTEGER,next=>"", numindex=>1},	
-	'.1.3.6.1.4.1.39997.99.4.3.2.0'=>{func=>\&get_sys4PcmkResourceGroupNumber,type=>ASN_INTEGER,next=>"", numindex=>1},	
-	'.1.3.6.1.4.1.39997.99.4.3.3.0'=>{func=>\&get_sys4PcmkResourceCloneNumber,type=>ASN_INTEGER,next=>"", numindex=>1},	
-	'.1.3.6.1.4.1.39997.99.4.3.4.0'=>{func=>\&get_sys4PcmkResourceMasterNumber,type=>ASN_INTEGER,next=>"", numindex=>1},	
-	'.1.3.6.1.4.1.39997.99.4.3.5.0'=>{func=>\&get_sys4PcmkResourceFailures,type=>ASN_INTEGER,next=>"", numindex=>1},	
+	'.1.3.6.1.4.1.39996.99.4.2.1.0'=>{func=>\&get_sys4PcmkTotalNodes,type=>ASN_INTEGER,next=>"", numindex=>1},	
+	'.1.3.6.1.4.1.39996.99.4.2.2.0'=>{func=>\&get_sys4PcmkOnlineNodes,type=>ASN_INTEGER,next=>"", numindex=>1},	
+	'.1.3.6.1.4.1.39996.99.4.3.1.0'=>{func=>\&get_sys4PcmkResourcePrimitiveNumber,type=>ASN_INTEGER,next=>"", numindex=>1},	
+	'.1.3.6.1.4.1.39996.99.4.3.2.0'=>{func=>\&get_sys4PcmkResourceGroupNumber,type=>ASN_INTEGER,next=>"", numindex=>1},	
+	'.1.3.6.1.4.1.39996.99.4.3.3.0'=>{func=>\&get_sys4PcmkResourceCloneNumber,type=>ASN_INTEGER,next=>"", numindex=>1},	
+	'.1.3.6.1.4.1.39996.99.4.3.4.0'=>{func=>\&get_sys4PcmkResourceMasterNumber,type=>ASN_INTEGER,next=>"", numindex=>1},	
+	'.1.3.6.1.4.1.39996.99.4.3.5.0'=>{func=>\&get_sys4PcmkResourceFailures,type=>ASN_INTEGER,next=>"", numindex=>1},	
 };
 
 $cibfilename = "/var/lib/heartbeat/crm/cib.xml";
