@@ -1,0 +1,85 @@
+pacemaker-snmp
+==============
+
+This project add SNMP support to the pacemaker Cluster Resource Manager.
+
+Thank for volunteering as a alpha tester for the SNMP agent software for the 
+pacemker cluster resource agent.
+
+The software, at the moment, is four files:
+- SYS4.mib: The MIB for my company providing the basic OID structure.
+- PACEMAKER.mib: The MIB for pacemaker.
+- pcmk-subagent.pl The SNMP agent.
+- This README.
+
+
+Installation:
+1) Install and configure net-snmp properly. You should be able to get data 
+when you walk the interface table:
+
+# snmpwalk <clusternode> ifTable
+
+Be sure your snmp agent runs as root, not as user snmp. You need to be root to 
+get cluster information.
+
+
+2) Copy the MIB files to the location where MIBs reside in your system. In 
+most systems this will be /usr/share/snmp/mibs, but in Debian-based systems 
+this is under /usr/share/mibs/* subdirectories.
+
+Please make sure that your systems knows about the new MIBs. An easy 
+way is to enter:
+
+# export MIBS=+ALL
+# export MIBDIRS=+<your MIB directory>
+
+in the shell you are working. Your system should give reasonable results
+for the command:
+
+# snmptranslate -IR -Tp sys4Pacemaker
+
+The installation of the MIBs is only nescessary on the computer that you send 
+the SNMP requests from, i.e. your management station. It is not nescessary on 
+the cluster nodes.
+
+
+3) Copy the perl file to /usr/local/sbin directory of your cluster nodes.
+
+
+4) Add the line
+
+perl do '/usr/local/sbin/pcmk-subagent.pl'
+
+to the configuration of your snmp agent, i.e. to /etc/snmp/snmpd.conf and 
+restart the snmpd.
+
+For debugging you also could start the snmpd daemon in the forground, not as a 
+background service:
+
+# snmpd -f -Lo
+
+5) Perhaps you have to install some perl moules. I use:
+
+use NetSNMP::agent::Support;
+use NetSNMP::ASN (':all');
+use XML::Simple;
+use Switch;
+use POSIX qw(uname);
+use List::Util qw(first);
+
+
+6) Retrive the data:
+
+# snmpwalk <clusternode> sys4Pacemaker
+
+
+Have fun! I would be happy about any comments, improvements, whishes and 
+feedback. Any OIDs missing? Do you want to have more data delivered by the 
+agent?
+
+Please do not distribute the program further. The OIDs of pacemaker are not on 
+the right place. The program is alpha. No (future: GPL) copyright notice 
+included, and so on. Thanks.
+
+Feedback to: ms@sys4.de
+Bitcoin donations to: 1K3KoigK2zjwAZsWuDyvWGdUTVzh8PaabT

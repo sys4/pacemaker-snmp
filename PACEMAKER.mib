@@ -1,0 +1,242 @@
+PACEMAKER-MIB DEFINITIONS ::= BEGIN
+
+-- SYS4 AG
+-- Franziskaner Str. 15
+-- 81669 Munich
+-- Germany
+
+-- SMIv2
+-- December 27th, 2013.
+
+-- This MIB defines the PACEMAKER objects.
+
+-- TODO: Paint the MIB tree in ASCII art
+
+IMPORTS
+        MODULE-IDENTITY, OBJECT-IDENTITY, NOTIFICATION-TYPE,
+        OBJECT-TYPE, enterprises, IpAddress
+                FROM SNMPv2-SMI
+        DisplayString FROM SNMPv2-TC
+        sys4Experimental FROM SYS4-MIB;
+
+sys4Pacemaker MODULE-IDENTITY
+	LAST-UPDATED "201312271000Z"
+	ORGANIZATION "sys4 inc."
+        CONTACT-INFO
+        "name: Michael Schwartzkopff
+	email: ms@sys4.de"
+
+	DESCRIPTION
+	"This MIB defines the objects of the pacemaker cluster resource manager."
+
+	REVISION "201312271000Z"
+	DESCRIPTION "First draft."
+
+	::= { sys4Experimental 4 }
+
+--
+
+sys4PcmkClusterConfig OBJECT-IDENTITY
+  STATUS current
+  DESCRIPTION
+  "The mib objects that describe the configuration of the pacemaker cluster."
+    ::= { sys4Pacemaker 1 }
+
+sys4PcmkNodes OBJECT-IDENTITY
+  STATUS current
+  DESCRIPTION
+  "The mib objects that describe the nodes of the pacemaker cluster."
+    ::= { sys4Pacemaker 2 }
+
+sys4PcmkTotalNodes OBJECT-TYPE
+  SYNTAX Integer32
+  MAX-ACCESS read-only
+  STATUS current
+  DESCRIPTION
+  "The mib object that describes of how many nodes the cluster knows in total."
+  ::= { sys4PcmkNodes 1 }
+
+sys4PcmkOnlineNodes OBJECT-TYPE
+  SYNTAX Integer32
+  MAX-ACCESS read-only
+  STATUS current
+  DESCRIPTION
+  "The mib object that describes of how many nodes of the cluster are online."
+  ::= { sys4PcmkNodes 2 }
+
+sys4PcmkNodeTable OBJECT-TYPE
+  SYNTAX SEQUENCE OF sys4PcmkNodeEntry
+  MAX-ACCESS not-accessible
+  STATUS current
+  DESCRIPTION
+    "This table describes the node entries of a pacemaker cluster."
+  ::= { sys4PcmkNodes 3 }
+
+sys4PcmkNodeEntry OBJECT-TYPE
+  SYNTAX	Sys4PcmkNodeEntry
+  MAX-ACCESS	not-accessible
+  STATUS	current
+  DESCRIPTION
+    "A row describing a node entry of a pacemaker cluster."
+  INDEX { sys4PcmkNodeIndex }
+  ::= { sys4PcmkNodeTable 1 }
+
+Sys4PcmkNodeEntry ::= SEQUENCE {
+	sys4PcmkNodeIndex	Integer32,
+	sys4PcmkNodeName	OCTECT STRING,
+	sys4PcmkNodeId		Integer32,
+	sys4PcmkNodeStatus	Integer32
+}
+
+sys4PcmkNodeIndex OBJECT-TYPE
+  SYNTAX	Integer32
+  MAX-ACCESS	read-only
+  STATUS	current
+  DESCRIPTION
+    "The index enumerating the nodes of a pacemaker cluster."
+  ::= { sys4PcmkNodeEntry 1 }
+
+sys4PcmkNodeName OBJECT-TYPE
+  SYNTAX	OCTET STRING (SIZE(1..128))
+  MAX-ACCESS	read-only
+  STATUS	current
+  DESCRIPTION
+    "The name of a node entry in a pacemaker cluster."
+  ::= { sys4PcmkNodeEntry 2 }
+
+sys4PcmkNodeId OBJECT-TYPE
+  SYNTAX        Integer32
+  MAX-ACCESS    read-only
+  STATUS        current
+  DESCRIPTION
+    "The ID of a node entry in a pacemaker cluster."
+  ::= { sys4PcmkNodeEntry 3 }
+
+-- Integer is not the correct syntax. For a start it is ok.
+sys4PcmkNodeStatus OBJECT-TYPE
+  SYNTAX INTEGER {
+    unknown (0),
+    online (1),
+    standby (2),
+    offline (3),
+    other (4)
+  }
+  MAX-ACCESS	read-only
+  STATUS	current
+  DESCRIPTION
+    "The status of a node. It can be one of
+     0 - undetermined
+     1 - online
+     2 - standby
+     3 - offline
+     4 - other"
+  ::= { sys4PcmkNodeEntry 4 }
+
+sys4PcmkResources OBJECT-IDENTITY
+  STATUS current
+  DESCRIPTION
+  "The mib objects that describe resource objects of the pacemaker cluster."
+  ::= { sys4Pacemaker 3 }
+
+sys4PcmkResourcePrimitiveNumber OBJECT-TYPE
+  SYNTAX Integer32
+  MAX-ACCESS read-only
+  STATUS current
+  DESCRIPTION
+  "The number of primitive resources configured in the cluster."
+  ::= { sys4PcmkResources 1 }
+
+sys4PcmkResourceGroupNumber OBJECT-TYPE
+  SYNTAX Integer32
+  MAX-ACCESS read-only
+  STATUS current
+  DESCRIPTION
+  "The number of group resources configured in the cluster."
+  ::= { sys4PcmkResources 2 }
+
+sys4PcmkResourceCloneNumber OBJECT-TYPE
+  SYNTAX Integer32
+  MAX-ACCESS read-only
+  STATUS current
+  DESCRIPTION
+  "The number of clone resources configured in the cluster."
+  ::= { sys4PcmkResources 3 }
+
+sys4PcmkResourceMasterNumber OBJECT-TYPE
+  SYNTAX Integer32
+  MAX-ACCESS read-only
+  STATUS current
+  DESCRIPTION
+  "The number of multistate resources configured in the cluster."
+  ::= { sys4PcmkResources 4 }
+
+sys4PcmkResourceFailures OBJECT-TYPE
+  SYNTAX Integer32
+  MAX-ACCESS read-only
+  STATUS current
+  DESCRIPTION
+  "The sum of failures of all resoures in the cluster."
+  ::= { sys4PcmkResources 5 }
+
+sys4PcmkResourceTable OBJECT-TYPE
+  SYNTAX SEQUENCE OF sys4PcmkResourceEntry
+  MAX-ACCESS not-accessible
+  STATUS current
+  DESCRIPTION
+    "This table describes the resource entries of a pacemaker cluster."
+  ::= { sys4PcmkResources 6 }
+
+sys4PcmkResourceEntry OBJECT-TYPE
+  SYNTAX        Sys4PcmkResourceEntry
+  MAX-ACCESS    not-accessible
+  STATUS        current
+  DESCRIPTION
+    "A row describing a node entry of a pacemaker cluster."
+  INDEX { sys4PcmkResourceIndex }
+  ::= { sys4PcmkResourceTable 1 }
+
+Sys4PcmkResourceEntry ::= SEQUENCE {
+        sys4PcmkResourceIndex       Integer32,
+        sys4PcmkResourceName        OCTECT STRING,
+        sys4PcmkResourceStatus      INTEGER,
+        sys4PcmkResourceFailure     Integer32
+}
+
+sys4PcmkResourceIndex OBJECT-TYPE
+  SYNTAX        Integer32
+  MAX-ACCESS    read-only
+  STATUS        current
+  DESCRIPTION
+    "The index enumerating the resources of a pacemaker cluster."
+  ::= { sys4PcmkResourceEntry 1 }
+
+sys4PcmkResourceName OBJECT-TYPE
+  SYNTAX        OCTET STRING
+  MAX-ACCESS    read-only
+  STATUS        current
+  DESCRIPTION
+    "The name of the resource in a pacemaker cluster."
+  ::= { sys4PcmkResourceEntry 2 }
+
+sys4PcmkResourceStatus OBJECT-TYPE
+  SYNTAX        INTEGER {
+    Stopped (0),
+    Started (1),
+    Master  (2),
+    Unknown (3)
+  }
+  MAX-ACCESS    read-only
+  STATUS        current
+  DESCRIPTION
+    "The status of the resource in a pacemaker cluster."
+  ::= { sys4PcmkResourceEntry 3 }
+
+sys4PcmkResourceFailure OBJECT-TYPE
+  SYNTAX        Integer32
+  MAX-ACCESS    read-only
+  STATUS        current
+  DESCRIPTION
+    "The counter of failures of the resource in a pacemaker cluster."
+  ::= { sys4PcmkResourceEntry 4 }
+
+END

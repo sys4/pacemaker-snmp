@@ -1,0 +1,72 @@
+SYS4-MIB DEFINITIONS ::= BEGIN
+
+-- SYS4, inc.
+-- Franziskaner Str. 15
+-- 81669 Munich
+-- Germany
+
+-- SMIv2
+-- November 8th, 2012
+
+-- This MIB defines the SYS4 objects.
+
+-- TODO: Paint the MIB tree in ASCII art
+
+
+IMPORTS
+	MODULE-IDENTITY, OBJECT-IDENTITY, NOTIFICATION-TYPE,
+	OBJECT-TYPE, enterprises
+		FROM SNMPv2-SMI
+	DisplayString FROM SNMPv2-TC;
+
+
+sys4 MODULE-IDENTITY
+	LAST-UPDATED "201211080814Z"
+	ORGANIZATION "www.sys4.de"
+	CONTACT-INFO    
+	"name:	Michael Schwartzkopff
+	email:	ms@sys4.de"
+
+	DESCRIPTION
+	"This MIB defines the objects of sys4, inc."
+
+	REVISION "201211080814Z"
+	DESCRIPTION "First draft."
+
+	::= { enterprises 39997 }
+
+
+-- SYS4 global registrations
+
+sys4GlobalRegistrations OBJECT-IDENTITY
+	STATUS current
+	DESCRIPTION
+	"This node is intended for global registration information only.
+	Eg, OID definitions that register products."
+	::= { sys4 1 }
+
+sys4ProdRegistrations OBJECT-IDENTITY
+	STATUS current
+	DESCRIPTION
+	"Specific product registrations are under this node."
+	::= { sys4GlobalRegistrations 1 }
+
+
+-- sys4 Products MIB Registrations
+
+sys4Products OBJECT-IDENTITY
+	STATUS current
+	DESCRIPTION
+	"All sys4 products are organized under this node"
+	::= { sys4 2 }
+
+
+-- sys4 Experimental Registrations
+
+sys4Experimental OBJECT-IDENTITY
+	STATUS current
+	DESCRIPTION
+	"All experimental MIB stuff is organized unter this node"
+	::= { sys4 99 }
+
+END
