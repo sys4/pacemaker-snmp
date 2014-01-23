@@ -39,27 +39,27 @@ sys4SNMP OBJECT-IDENTITY
         STATUS current
         DESCRIPTION
         "The part of the sys4 tree describing all entities used for network management."
-        :: { sys4 161 }
+        ::= { sys4 161 }
 
 -- SYS4 global registrations
 
-sys4GlobalRegistrations OBJECT-IDENTITY
+sys4SNMPGlobalRegistrations OBJECT-IDENTITY
 	STATUS current
 	DESCRIPTION
 	"This node is intended for global registration information only.
 	Eg, OID definitions that register products."
 	::= { sys4SNMP 1 }
 
-sys4ProdRegistrations OBJECT-IDENTITY
+sys4SNMPProdRegistrations OBJECT-IDENTITY
 	STATUS current
 	DESCRIPTION
 	"Specific product registrations are under this node."
-	::= { sys4GlobalRegistrations 1 }
+	::= { sys4SNMPGlobalRegistrations 1 }
 
 
 -- sys4 Products MIB Registrations
 
-sys4Products OBJECT-IDENTITY
+sys4SNMPProducts OBJECT-IDENTITY
 	STATUS current
 	DESCRIPTION
 	"All sys4 products are organized under this node"
@@ -68,7 +68,7 @@ sys4Products OBJECT-IDENTITY
 
 -- sys4 Experimental Registrations
 
-sys4Experimental OBJECT-IDENTITY
+sys4SNMPExperimental OBJECT-IDENTITY
 	STATUS current
 	DESCRIPTION
 	"All experimental MIB stuff is organized unter this node"
