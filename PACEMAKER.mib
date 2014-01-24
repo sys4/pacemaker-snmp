@@ -17,7 +17,7 @@ IMPORTS
         OBJECT-TYPE, enterprises, IpAddress
                 FROM SNMPv2-SMI
         DisplayString FROM SNMPv2-TC
-        sys4Experimental FROM SYS4-MIB;
+        sys4SNMPExperimental FROM SYS4-MIB;
 
 sys4Pacemaker MODULE-IDENTITY
 	LAST-UPDATED "201312271000Z"
