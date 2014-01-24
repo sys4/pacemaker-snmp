@@ -146,7 +146,7 @@ sub check_sys4PcmkNodeTable {
   my ($oid) = shift;
 
   # The values of the oid elements for the indexes
-  my $idx_sys4PcmkNodeIndex = getOidElement($oid, 13);
+  my $idx_sys4PcmkNodeIndex = getOidElement($oid, 14);
 
   # Load the sys4PcmkNodeTable table data
   load_sys4PcmkNodeTable();
@@ -154,7 +154,6 @@ sub check_sys4PcmkNodeTable {
   # Check the index is in range and valid
   my $maxNodes = get_sys4PcmkTotalNodes ();
   if (($idx_sys4PcmkNodeIndex < 1) || ( $idx_sys4PcmkNodeIndex > $maxNodes)) {
-    print STDERR "Index" . $idx_sys4PcmkNodeIndex . "out of range\n";
     return 0;
   } else {
     return 1;
@@ -173,7 +172,7 @@ sub next_sys4PcmkNodeTable {
   my ($oid) = shift;
 
   # The values of the oid elements for the indexes
-  my $idx_sys4PcmkNodeIndex = getOidElement($oid, 13);
+  my $idx_sys4PcmkNodeIndex = getOidElement($oid, 14);
 
   # Load the sys4PcmkNodeTable table data
   load_sys4PcmkNodeTable();
@@ -182,7 +181,7 @@ sub next_sys4PcmkNodeTable {
   # or return 0 if no more OIDs in this table
 
   my @idx = $oid->to_array();
-  my $index = $idx[-1];
+  my $index = @idx[-1];
   my $maxNodes = get_sys4PcmkTotalNodes ();
   if (( $index >= 0) && ($index < $maxNodes)) {
     $idx[-1]++;
@@ -199,7 +198,7 @@ sub get_sys4PcmkNodeIndex {
   my ($oid) = shift;
 
   # The values of the oid elements for the indexes
-  my $idx_sys4PcmkNodeIndex = getOidElement($oid, 13);
+  my $idx_sys4PcmkNodeIndex = getOidElement($oid, 14);
 
   # Load the sys4PcmkNodeTable table data
   load_sys4PcmkNodeTable();
@@ -217,7 +216,7 @@ sub get_sys4PcmkNodeName {
   my ($oid) = shift;
 
   # The values of the oid elements for the indexes
-  my $idx_sys4PcmkNodeIndex = getOidElement($oid, 13);
+  my $idx_sys4PcmkNodeIndex = getOidElement($oid, 14);
 
   # Load the sys4PcmkNodeTable table data
   load_sys4PcmkNodeTable();
@@ -244,7 +243,7 @@ sub get_sys4PcmkNodeId {
   my ($oid) = shift;
 
   # The values of the oid elements for the indexes
-  my $idx_sys4PcmkNodeIndex = getOidElement($oid, 13);
+  my $idx_sys4PcmkNodeIndex = getOidElement($oid, 14);
 
   # Load the sys4PcmkNodeTable table data
   load_sys4PcmkNodeTable();
@@ -280,7 +279,7 @@ sub get_sys4PcmkNodeStatus {
   my ($oid) = shift;
 
   # The values of the oid elements for the indexes
-  my $idx_sys4PcmkNodeIndex = getOidElement($oid, 13);
+  my $idx_sys4PcmkNodeIndex = getOidElement($oid, 14);
 
   # Load the sys4PcmkNodeTable table data
   load_sys4PcmkNodeTable();
@@ -437,7 +436,7 @@ sub check_sys4PcmkResourceTable {
   my ($oid) = shift;
 
   # The values of the oid elements for the indexes
-  my $idx_sys4PcmkResourceIndex = getOidElement($oid, 13);
+  my $idx_sys4PcmkResourceIndex = getOidElement($oid, 14);
 
 
   # Load the sys4PcmkResourceTable table data
@@ -493,7 +492,7 @@ sub next_sys4PcmkResourceTable {
   my ($oid) = shift;
 
   # The values of the oid elements for the indexes
-  my $idx_sys4PcmkResourceIndex = getOidElement($oid, 13);
+  my $idx_sys4PcmkResourceIndex = getOidElement($oid, 14);
 
   # Load the sys4PcmkResourceTable table data
   load_sys4PcmkResourceTable();
@@ -518,7 +517,7 @@ sub get_sys4PcmkResourceIndex {
   my ($oid) = shift;
 
   # The values of the oid elements for the indexes
-  my $idx_sys4PcmkResourceIndex = getOidElement($oid, 13);
+  my $idx_sys4PcmkResourceIndex = getOidElement($oid, 14);
 
   # Load the sys4PcmkResourceTable table data
   load_sys4PcmkResourceTable();
@@ -545,7 +544,7 @@ sub get_sys4PcmkResourceName {
   my ($oid) = shift;
 
   # The values of the oid elements for the indexes
-  my $idx_sys4PcmkResourceIndex = getOidElement($oid, 13);
+  my $idx_sys4PcmkResourceIndex = getOidElement($oid, 14);
 
   # Load the sys4PcmkResourceTable table data
   load_sys4PcmkResourceTable();
@@ -571,7 +570,7 @@ sub get_sys4PcmkResourceStatus {
   my ($oid) = shift;
 
   # The values of the oid elements for the indexes
-  my $idx_sys4PcmkResourceIndex = getOidElement($oid, 13);
+  my $idx_sys4PcmkResourceIndex = getOidElement($oid, 14);
 
   # Load the sys4PcmkResourceTable table data
   load_sys4PcmkResourceTable();
@@ -597,7 +596,7 @@ sub get_sys4PcmkResourceFailure {
   my ($oid) = shift;
 
   # The values of the oid elements for the indexes
-  my $idx_sys4PcmkResourceIndex = getOidElement($oid, 13);
+  my $idx_sys4PcmkResourceIndex = getOidElement($oid, 14);
 
   # Load the sys4PcmkResourceTable table data
   load_sys4PcmkResourceTable();
@@ -616,22 +615,22 @@ sub get_sys4PcmkResourceFailure {
 # Hash for all OIDs
 my  $oidtable={
 # Table objects
-    ".1.3.6.1.4.1.39996.99.4.2.3.1.1.0"=>{func=>\&get_sys4PcmkNodeIndex,type=>ASN_INTEGER, check=>\&check_sys4PcmkNodeTable, nextoid=>\&next_sys4PcmkNodeTable, istable=>'1', next=>"", numindex=>1},
-    ".1.3.6.1.4.1.39996.99.4.2.3.1.2.0"=>{func=>\&get_sys4PcmkNodeName,type=>ASN_OCTET_STR, check=>\&check_sys4PcmkNodeTable, nextoid=>\&next_sys4PcmkNodeTable, istable=>'1', next=>"", numindex=>1},
-    ".1.3.6.1.4.1.39996.99.4.2.3.1.3.0"=>{func=>\&get_sys4PcmkNodeId,type=>ASN_INTEGER, check=>\&check_sys4PcmkNodeTable, nextoid=>\&next_sys4PcmkNodeTable, istable=>'1', next=>"", numindex=>1},
-    ".1.3.6.1.4.1.39996.99.4.2.3.1.4.0"=>{func=>\&get_sys4PcmkNodeStatus,type=>ASN_INTEGER, check=>\&check_sys4PcmkNodeTable, nextoid=>\&next_sys4PcmkNodeTable, istable=>'1', next=>"", numindex=>1},
-    ".1.3.6.1.4.1.39996.99.4.3.6.1.1.0"=>{func=>\&get_sys4PcmkResourceIndex,type=>ASN_INTEGER, check=>\&check_sys4PcmkResourceTable, nextoid=>\&next_sys4PcmkResourceTable, istable=>'1', next=>"", numindex=>1},
-    ".1.3.6.1.4.1.39996.99.4.3.6.1.2.0"=>{func=>\&get_sys4PcmkResourceName,type=>ASN_OCTET_STR, check=>\&check_sys4PcmkResourceTable, nextoid=>\&next_sys4PcmkResourceTable, istable=>'1', next=>"", numindex=>1},
-    ".1.3.6.1.4.1.39996.99.4.3.6.1.3.0"=>{func=>\&get_sys4PcmkResourceStatus,type=>ASN_INTEGER, check=>\&check_sys4PcmkResourceTable, nextoid=>\&next_sys4PcmkResourceTable, istable=>'1', next=>"", numindex=>1},
-    ".1.3.6.1.4.1.39996.99.4.3.6.1.4.0"=>{func=>\&get_sys4PcmkResourceFailure,type=>ASN_INTEGER, check=>\&check_sys4PcmkResourceTable, nextoid=>\&next_sys4PcmkResourceTable, istable=>'1', next=>"", numindex=>1},
+    ".1.3.6.1.4.1.39996.161.99.4.2.3.1.1.0"=>{func=>\&get_sys4PcmkNodeIndex,type=>ASN_INTEGER, check=>\&check_sys4PcmkNodeTable, nextoid=>\&next_sys4PcmkNodeTable, istable=>'1', next=>"", numindex=>1},
+    ".1.3.6.1.4.1.39996.161.99.4.2.3.1.2.0"=>{func=>\&get_sys4PcmkNodeName,type=>ASN_OCTET_STR, check=>\&check_sys4PcmkNodeTable, nextoid=>\&next_sys4PcmkNodeTable, istable=>'1', next=>"", numindex=>1},
+    ".1.3.6.1.4.1.39996.161.99.4.2.3.1.3.0"=>{func=>\&get_sys4PcmkNodeId,type=>ASN_INTEGER, check=>\&check_sys4PcmkNodeTable, nextoid=>\&next_sys4PcmkNodeTable, istable=>'1', next=>"", numindex=>1},
+    ".1.3.6.1.4.1.39996.161.99.4.2.3.1.4.0"=>{func=>\&get_sys4PcmkNodeStatus,type=>ASN_INTEGER, check=>\&check_sys4PcmkNodeTable, nextoid=>\&next_sys4PcmkNodeTable, istable=>'1', next=>"", numindex=>1},
+    ".1.3.6.1.4.1.39996.161.99.4.3.6.1.1.0"=>{func=>\&get_sys4PcmkResourceIndex,type=>ASN_INTEGER, check=>\&check_sys4PcmkResourceTable, nextoid=>\&next_sys4PcmkResourceTable, istable=>'1', next=>"", numindex=>1},
+    ".1.3.6.1.4.1.39996.161.99.4.3.6.1.2.0"=>{func=>\&get_sys4PcmkResourceName,type=>ASN_OCTET_STR, check=>\&check_sys4PcmkResourceTable, nextoid=>\&next_sys4PcmkResourceTable, istable=>'1', next=>"", numindex=>1},
+    ".1.3.6.1.4.1.39996.161.99.4.3.6.1.3.0"=>{func=>\&get_sys4PcmkResourceStatus,type=>ASN_INTEGER, check=>\&check_sys4PcmkResourceTable, nextoid=>\&next_sys4PcmkResourceTable, istable=>'1', next=>"", numindex=>1},
+    ".1.3.6.1.4.1.39996.161.99.4.3.6.1.4.0"=>{func=>\&get_sys4PcmkResourceFailure,type=>ASN_INTEGER, check=>\&check_sys4PcmkResourceTable, nextoid=>\&next_sys4PcmkResourceTable, istable=>'1', next=>"", numindex=>1},
 # Scalars
-	'.1.3.6.1.4.1.39996.99.4.2.1.0'=>{func=>\&get_sys4PcmkTotalNodes,type=>ASN_INTEGER,next=>"", numindex=>1},	
-	'.1.3.6.1.4.1.39996.99.4.2.2.0'=>{func=>\&get_sys4PcmkOnlineNodes,type=>ASN_INTEGER,next=>"", numindex=>1},	
-	'.1.3.6.1.4.1.39996.99.4.3.1.0'=>{func=>\&get_sys4PcmkResourcePrimitiveNumber,type=>ASN_INTEGER,next=>"", numindex=>1},	
-	'.1.3.6.1.4.1.39996.99.4.3.2.0'=>{func=>\&get_sys4PcmkResourceGroupNumber,type=>ASN_INTEGER,next=>"", numindex=>1},	
-	'.1.3.6.1.4.1.39996.99.4.3.3.0'=>{func=>\&get_sys4PcmkResourceCloneNumber,type=>ASN_INTEGER,next=>"", numindex=>1},	
-	'.1.3.6.1.4.1.39996.99.4.3.4.0'=>{func=>\&get_sys4PcmkResourceMasterNumber,type=>ASN_INTEGER,next=>"", numindex=>1},	
-	'.1.3.6.1.4.1.39996.99.4.3.5.0'=>{func=>\&get_sys4PcmkResourceFailures,type=>ASN_INTEGER,next=>"", numindex=>1},	
+	'.1.3.6.1.4.1.39996.161.99.4.2.1.0'=>{func=>\&get_sys4PcmkTotalNodes,type=>ASN_INTEGER,next=>"", numindex=>1},	
+	'.1.3.6.1.4.1.39996.161.99.4.2.2.0'=>{func=>\&get_sys4PcmkOnlineNodes,type=>ASN_INTEGER,next=>"", numindex=>1},	
+	'.1.3.6.1.4.1.39996.161.99.4.3.1.0'=>{func=>\&get_sys4PcmkResourcePrimitiveNumber,type=>ASN_INTEGER,next=>"", numindex=>1},	
+	'.1.3.6.1.4.1.39996.161.99.4.3.2.0'=>{func=>\&get_sys4PcmkResourceGroupNumber,type=>ASN_INTEGER,next=>"", numindex=>1},	
+	'.1.3.6.1.4.1.39996.161.99.4.3.3.0'=>{func=>\&get_sys4PcmkResourceCloneNumber,type=>ASN_INTEGER,next=>"", numindex=>1},	
+	'.1.3.6.1.4.1.39996.161.99.4.3.4.0'=>{func=>\&get_sys4PcmkResourceMasterNumber,type=>ASN_INTEGER,next=>"", numindex=>1},	
+	'.1.3.6.1.4.1.39996.161.99.4.3.5.0'=>{func=>\&get_sys4PcmkResourceFailures,type=>ASN_INTEGER,next=>"", numindex=>1},	
 };
 
 $cibfilename = "/var/lib/heartbeat/crm/cib.xml";
