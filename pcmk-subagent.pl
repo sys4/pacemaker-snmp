@@ -52,7 +52,7 @@ sub init_CIB {
 
     # Init the %cibstatus hash
     my $dummy = `cibadmin -Q -o status`;
-    $cibstatus = XMLin ($dummy);
+    $cibstatus = XMLin ($dummy, ForceArray => [ 'node_state', ] );
 
     # Init the resoruces arrays
     my $maxresources = find_MaxResources ();
@@ -330,13 +330,21 @@ sub get_sys4PcmkOnlineNodes {
 
   init_CIB ();
 
+  # print "OnlineNodes: Starting.\n";
+
   my $maxnodes = get_sys4PcmkTotalNodes ();
+  print "Online: Found $maxnodes max nodes.\n";
   my $onlinecount = 0;
 
   for my $i (0..$maxnodes-1) {
     my $nodename = ${$CIB->{configuration}->{nodes}}[$i]->{uname};
+    print "Online: checking node $nodename.\n";
+
+    print Dumper ($cibstatus->{node_state});
     if ($cibstatus->{node_state}->{$nodename}->{crmd} eq "online") {
-      if (${$CIB->{configuration}->{nodes}}[$i]->{instance_attributes}->{nvpair}->{standby}->{value} eq "off") {
+      print "Online: is online.\n";
+      if ((${$CIB->{configuration}->{nodes}}[$i]->{instance_attributes}->{nvpair}->{standby}->{value} eq "off") ||
+          (!exists ${$CIB->{configuration}->{nodes}}[$i]->{instance_attributes}->{nvpair}->{standby}->{value} )) {
         $onlinecount++;
       }
     }
