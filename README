@@ -28,13 +28,15 @@ most systems this will be /usr/share/snmp/mibs, but in Debian-based systems
 this is under /usr/share/mibs/* subdirectories.
 
 Please make sure that your systems knows about the new MIBs. An easy 
-way is to enter:
+way on the management station is to enter:
 
 # export MIBS=+ALL
 # export MIBDIRS=+<your MIB directory>
 
-in the shell you are working. Your system should give reasonable results
-for the command:
+in the shell you are working. On the cluster node you need to copy the files
+into that directory where your system read the MIBs from when the agent is starting.
+
+Your system should give reasonable results entering the command:
 
 # snmptranslate -IR -Tp sys4Pacemaker
 
