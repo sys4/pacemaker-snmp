@@ -315,8 +315,7 @@ sub get_sys4PcmkTotalNodes {
 
   init_CIB ();
 
-  my $nodes = @{$CIB->{configuration}->{nodes}};
-
+  my $nodes = scalar @{$CIB->{configuration}->{nodes}};
   return ($nodes);
 
 }
@@ -354,7 +353,7 @@ sub get_sys4PcmkOnlineNodes {
 # -------------------------------------------------------
 sub get_sys4PcmkResourcePrimitiveNumber { 
 
-  my $primitives = @{$CIB->{configuration}->{resources}->{primitive}};
+  my $primitives = scalar @{$CIB->{configuration}->{resources}->{primitive}};
   return "$primitives";
 
 }
@@ -403,7 +402,7 @@ sub get_sys4PcmkResourceMasterNumber {
 sub get_sys4PcmkResourceFailures { 
 
   my $failures = 0;
-  foreach my $node ( keys $cibstatus->{node_state} ) {
+  foreach my $node ( keys %{$cibstatus->{node_state}} ) {
     foreach my $attribute ( keys %{$cibstatus->{node_state}->{$node}->{transient_attributes}->{instance_attributes}->{nvpair}} ) {
       if ($attribute =~ "^fail-count") {
         $failures += $cibstatus->{node_state}->{$node}->{transient_attributes}->{instance_attributes}->{nvpair}->{$attribute}->{value};
@@ -612,7 +611,6 @@ sub get_sys4PcmkResourceFailure {
 
 }
 
-
 # Hash for all OIDs
 my  $oidtable={
 # Table objects
@@ -639,6 +637,9 @@ if ( ! -e $cibfilename ) {
   $cibfilename = "/var/lib/pacemaker/crm/cib.xml";
 }
 if ( ! -e $cibfilename ) {
+  $cibfilename = "/var/lib/pacemaker/cib/cib.xml";
+}
+if ( ! -e $cibfilename ) {
   print STDERR "Error: Could not find CIB.\n";
   exit -1;
 }
@@ -647,7 +648,10 @@ print STDERR "Initializing pcmk agent from file $cibfilename.\n";
 init_CIB ();
 print  STDERR "Done pcmk initialization\n";
 
+print "Done init pcmk subagent\n";
+
 
 # Register the top oid with the agent
-registerAgent($agent, 'sys4Pacemaker', $oidtable);
+# registerAgent($agent, 'sys4Pacemaker', $oidtable);
+registerAgent($agent, '.1.3.6.1.4.1.39996.161.99.4', $oidtable);
 
