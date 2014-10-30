@@ -74,12 +74,28 @@ use List::Util qw(first);
 
 # snmpwalk <clusternode> sys4Pacemaker
 
+7) Access rights
+
+On a system normally only the root user has access to the data of the CIB. The snmpd
+normally runs as the user snmp. So when you run the agent in the background you will
+have problems accessing the data. You have two options:
+
+7.1) Run snmpd a root
+
+This also solvs problems using the logmatch or extend options in snmpd.
+Use SNMPv3 for the communication with the agent.
+
+7.2) Add ACLs to pacemaker
+
+You can add ACLs to pacemaker so that the snmp user has access to the information. See
+http://clusterlabs.org/doc/acls.html for more information.
+
 
 Have fun! I would be happy about any comments, improvements, whishes and 
 feedback. Any OIDs missing? Do you want to have more data delivered by the 
 agent?
 
-Please do not distribute the program further. The OIDs of pacemaker are not on 
+The OIDs of pacemaker are not on 
 the right place. The program is alpha. No (future: GPL) copyright notice 
 included, and so on. Thanks.
 
